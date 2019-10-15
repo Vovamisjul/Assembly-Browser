@@ -8,5 +8,16 @@ namespace AssemblyInfo.Members
 {
     public class Method
     {
+        public Method(string attributes, string returnType, string name, string[] parameters)
+        {
+            Attributes = attributes;
+            ReturnType = returnType;
+            Name = name;
+            Parameters = parameters;
+        }
+        public string Attributes { get; }
+        public string ReturnType { get; }
+        public string Name { get; }
+        public string[] Parameters { get; }
     }
 }

@@ -8,10 +8,12 @@ namespace AssemblyInfo
 {
     public class Assembly
     {
-        public Assembly(TypeInfo[] types)
+        public Assembly(TypeInfo[] types, string name)
         {
-            this.types = types;
+            Types = types;
+            Name = name;
         }
-        TypeInfo[] types { get; }
+        public TypeInfo[] Types { get; }
+        public string Name { get; }
     }
 }

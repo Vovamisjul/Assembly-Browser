@@ -9,14 +9,16 @@ namespace AssemblyInfo
 {
     public class TypeInfo
     {
-        public TypeInfo(Method[] methods, Field[] fields, Property[] properties)
+        public TypeInfo(Method[] methods, Field[] fields, Property[] properties, string name)
         {
-            this.methods = methods;
-            this.fields = fields;
-            this.properties = properties;
+            Methods = methods;
+            Fields = fields;
+            Properties = properties;
+            Name = name;
         }
-        Method[] methods { get; }
-        Field[] fields { get; }
-        Property[] properties { get; }
+        public string Name { get; }
+        public Method[] Methods { get; }
+        public Field[] Fields { get; }
+        public Property[] Properties { get; }
     }
 }

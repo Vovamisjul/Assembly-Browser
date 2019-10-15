@@ -10,12 +10,12 @@ namespace AssemblyInfo
     {
         public Field(string attributes, string type, string name)
         {
-            this.attributes = attributes;
-            this.type = type;
-            this.name = name;
+            Attributes = attributes;
+            Type = type;
+            Name = name;
         }
-        public string attributes { get; }
-        public string type { get; }
-        public string name { get; }
+        public string Attributes { get; }
+        public string Type { get; }
+        public string Name { get; }
     }
 }

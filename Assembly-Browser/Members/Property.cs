@@ -8,14 +8,18 @@ namespace AssemblyInfo
 {
     public class Property : IMember
     {
-        public Property(string attributes, string type, string name)
+        public Property(string attributes, string type, string name, string setMethod, string getMethod)
         {
-            this.attributes = attributes;
-            this.type = type;
-            this.name = name;
+            Attributes = attributes;
+            Type = type;
+            Name = name;
+            SetMethod = setMethod;
+            GetMethod = getMethod;
         }
-        public string attributes { get; }
-        public string type { get; }
-        public string name { get; }
+        public string Attributes { get; }
+        public string Type { get; }
+        public string Name { get; }
+        public string SetMethod { get; }
+        public string GetMethod { get; }
     }
 }

@@ -8,8 +8,8 @@ namespace AssemblyInfo
 {
     interface IMember
     {
-        string attributes { get; }
-        string type { get; }
-        string name { get; }
+        string Attributes { get; }
+        string Type { get; }
+        string Name { get; }
     }
 }
