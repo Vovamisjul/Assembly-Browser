@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace AssemblyInfo
 {
-    public class Property : IMember
+    public class Property : Member
     {
-        public Property(string attributes, string type, string name, string setMethod, string getMethod)
+        public Property(string name, string type,string setMethod, string getMethod)
         {
-            Attributes = attributes;
             Type = type;
             Name = name;
             SetMethod = setMethod;
             GetMethod = getMethod;
         }
-        public string Attributes { get; }
-        public string Type { get; }
-        public string Name { get; }
         public string SetMethod { get; }
         public string GetMethod { get; }
+        public override string ToString()
+        {
+            return base.ToString() + "{ " + GetMethod + " get; " + SetMethod + " set; }";
+        }
     }
 }

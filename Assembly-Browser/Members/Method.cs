@@ -19,5 +19,9 @@ namespace AssemblyInfo.Members
         public string ReturnType { get; }
         public string Name { get; }
         public string[] Parameters { get; }
+        public override string ToString()
+        {
+            return Attributes + " " + ReturnType + " " + Name + "(" + String.Join(", ", Parameters) + ")";
+        }
     }
 }
