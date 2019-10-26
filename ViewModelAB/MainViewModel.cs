@@ -1,4 +1,5 @@
 ﻿using AssemblyInfo;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -32,15 +34,6 @@ namespace ViewModelAB
                 _nodes = value;
                 OnPropertyChanged();
             }
-        }
-
-        public MainViewModel()
-        {
-            _assembly = loader.Load("D:\\spp\\Assembly-Browser\\dlls\\Generators.dll");
-            Nodes = new ObservableCollection<Node>
-            {
-                new Node(_assembly.ToString(), NamespacesToObservableCollection(_assembly.Namespaces))
-            };
         }
 
         private ObservableCollection<Node> NamespacesToObservableCollection(Dictionary<string, NamespaceInfo> namespaces)
@@ -80,6 +73,19 @@ namespace ViewModelAB
             }
             return collection;
         }
-    
+        public void OpenAssembly(object o, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Filter += "Dll files(*.dll)|*.dll";
+            if (fileDialog.ShowDialog() == false)
+                return;
+            _assembly = loader.Load(fileDialog.FileName);
+            Nodes = new ObservableCollection<Node>
+            {
+                new Node(_assembly.ToString(), NamespacesToObservableCollection(_assembly.Namespaces))
+            };
+
+        }
+
     }
 }
