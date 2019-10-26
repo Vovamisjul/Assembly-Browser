@@ -9,7 +9,7 @@ namespace AssemblyInfo
 {
     public class TypeInfo
     {
-        public TypeInfo(Method[] methods, Field[] fields, Property[] properties, string name, string attributes)
+        public TypeInfo(List<Method> methods, List<Field> fields, List<Property> properties, string name, string attributes)
         {
             Methods = methods;
             Fields = fields;
@@ -19,9 +19,9 @@ namespace AssemblyInfo
         }
         public string Name { get; }
         public string Attributes { get; }
-        public Method[] Methods { get; }
-        public Field[] Fields { get; }
-        public Property[] Properties { get; }
+        public List<Method> Methods { get; }
+        public List<Field> Fields { get; }
+        public List<Property> Properties { get; }
         public override string ToString()
         {
             return Attributes + " " + Name;

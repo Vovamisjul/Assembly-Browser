@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C048E229-CF4D-4E04-85A0-0860DCB703C2}</ProjectGuid>
+    <ProjectGuid>{FA27BCA9-AB7F-4A87-9CCF-779FEA1AD107}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Assembly_Browser</RootNamespace>
-    <AssemblyName>Assembly-Browser</AssemblyName>
+    <RootNamespace>ViewModelAB</RootNamespace>
+    <AssemblyName>ViewModelAB</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,14 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assembly.cs" />
-    <Compile Include="Members\Field.cs" />
-    <Compile Include="Loader.cs" />
-    <Compile Include="Members\Method.cs" />
-    <Compile Include="NamespaceInfo.cs" />
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Members\Property.cs" />
-    <Compile Include="TypeInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Assembly-Browser\Assembly-Browser.csproj">
+      <Project>{C048E229-CF4D-4E04-85A0-0860DCB703C2}</Project>
+      <Name>Assembly-Browser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

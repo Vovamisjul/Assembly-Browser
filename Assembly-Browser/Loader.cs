@@ -14,6 +14,7 @@ namespace AssemblyInfo
         {
             var assembly = System.Reflection.Assembly.LoadFrom(file);
             var types = new List<TypeInfo>();
+            var namespaces = new Dictionary<string, NamespaceInfo>();
             foreach (var type in assembly.ExportedTypes)
             {
                 var fields = new List<Field>();
@@ -24,7 +25,7 @@ namespace AssemblyInfo
                 var properties = new List<Property>();
                 foreach (var property in type.GetProperties())
                 {
-                    properties.Add(new Property(property.Name, property.ReflectedType.Name,
+                    properties.Add(new Property(property.Name,
                         GetMethodAttributes(property.SetMethod.Attributes), GetMethodAttributes(property.GetMethod.Attributes)));
                 }
                 var methods = new List<Method>();
@@ -33,9 +34,16 @@ namespace AssemblyInfo
                     methods.Add(new Method(GetMethodAttributes(method.Attributes), method.ReturnType.ToString(), method.Name, 
                         method.GetParameters().Select(parameter => parameter.ParameterType.ToString()).ToArray()));
                 }
-                types.Add(new TypeInfo(methods.ToArray(), fields.ToArray(), properties.ToArray(), type.FullName, GetTypeAttributes(type.Attributes)));
+                if (namespaces.ContainsKey(type.Namespace))
+                {
+                    namespaces[type.Namespace].Types.Add(new TypeInfo(methods, fields, properties, type.FullName, GetTypeAttributes(type.Attributes)));
+                }
+                else
+                {
+                    namespaces.Add(type.Namespace, new NamespaceInfo(type.Namespace, new List<TypeInfo> { new TypeInfo(methods, fields, properties, type.FullName, GetTypeAttributes(type.Attributes)) }));
+                }
             }
-            return new Assembly(types.ToArray(), assembly.FullName);
+            return new Assembly(namespaces, assembly.FullName);
         }
 
         private string GetTypeAttributes(TypeAttributes attr)
@@ -76,7 +84,7 @@ namespace AssemblyInfo
                 if (attr.HasFlag(MethodAttributes.Abstract))
                     result += "abstract ";
                 else
-                    result += "virtul ";
+                    result += "virtual ";
             }
             if (attr.HasFlag(MethodAttributes.Final))
                 result += "sealed ";

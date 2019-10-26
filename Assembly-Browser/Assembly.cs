@@ -8,12 +8,16 @@ namespace AssemblyInfo
 {
     public class Assembly
     {
-        public Assembly(TypeInfo[] types, string name)
+        public Assembly(Dictionary<string, NamespaceInfo> namespaces, string name)
         {
-            Types = types;
+            Namespaces = namespaces;
             Name = name;
         }
-        public TypeInfo[] Types { get; }
+        public Dictionary<string, NamespaceInfo> Namespaces { get; }
         public string Name { get; }
+        public override string ToString()
+        {
+            return "Assembly " + Name;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AssemblyInfo
+namespace AssemblyInfo.Members
 {
     public class Field
     {
@@ -17,5 +17,9 @@ namespace AssemblyInfo
         public string Attributes { get; }
         public string Type { get; }
         public string Name { get; }
+        public override string ToString()
+        {
+            return Attributes + " " + Type + " " + Name;
+        }
     }
 }
