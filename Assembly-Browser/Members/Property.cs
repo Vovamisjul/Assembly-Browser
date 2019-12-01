@@ -19,7 +19,7 @@ namespace AssemblyInfo
         public string GetMethod { get; }
         public override string ToString()
         {
-            return Name + "{ " + GetMethod + " get; " + SetMethod + " set; }";
+            return Name + "{ " + ((GetMethod != null) ? (GetMethod + " get; }") : ("")) + ((SetMethod != null) ? (SetMethod + " set; }") : (""));
         }
     }
 }

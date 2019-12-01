@@ -1,6 +1,7 @@
 ﻿using AssemblyInfo.Members;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -20,13 +21,14 @@ namespace AssemblyInfo
                 var fields = new List<Field>();
                 foreach (var field in type.GetFields())
                 {
-                    fields.Add(new Field(field.Name, field.ReflectedType.Name, GetFieldAttributes(field.Attributes)));
+                    fields.Add(new Field(GetFieldAttributes(field.Attributes), field.ReflectedType.Name, field.Name));
                 }
                 var properties = new List<Property>();
                 foreach (var property in type.GetProperties())
                 {
                     properties.Add(new Property(property.Name,
-                        GetMethodAttributes(property.SetMethod.Attributes), GetMethodAttributes(property.GetMethod.Attributes)));
+                        property.SetMethod != null ? GetMethodAttributes(property.SetMethod.Attributes) : null,
+                        property.GetMethod != null ? GetMethodAttributes(property.GetMethod.Attributes) : null));
                 }
                 var methods = new List<Method>();
                 foreach (var method in type.GetMethods())
@@ -40,7 +42,8 @@ namespace AssemblyInfo
                 }
                 else
                 {
-                    namespaces.Add(type.Namespace, new NamespaceInfo(type.Namespace, new List<TypeInfo> { new TypeInfo(methods, fields, properties, type.FullName, GetTypeAttributes(type.Attributes)) }));
+                    namespaces.Add(type.Namespace, new NamespaceInfo(type.Namespace, 
+                        new List<TypeInfo> { new TypeInfo(methods, fields, properties, type.FullName, GetTypeAttributes(type.Attributes)) }));
                 }
             }
             return new Assembly(namespaces, assembly.FullName);

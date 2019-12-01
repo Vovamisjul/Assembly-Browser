@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,11 @@ namespace Tests
     public class Test
     {
         Loader _loader = new Loader();
-        const string directory = "D:\\spp\\Assembly-Browser\\dlls\\";
+        const string directory = "D:\\spp\\Assembly-Browser\\Tests\\dlls\\";
         [Test]
         public void When_Interface_Expect_ShowIt()
         {
+            var a = Directory.GetCurrentDirectory();
             var assembly = _loader.Load(directory + "IGenerator.dll");
             Assert.Multiple(() =>
             {
@@ -47,6 +49,12 @@ namespace Tests
                 Assert.AreEqual(assembly.Namespaces["Generators"].Types[1].ToString(), "public class Generators.DateTimeGenerator");
                 Assert.AreEqual(assembly.Namespaces["Generators"].Types[2].ToString(), "public class Generators.LongGenerator");
             });
+        }
+        [Test]
+        public void When_NoGet_Expect_ShowIt()
+        {
+            var assembly = _loader.Load(directory + "testclasses.dll");
+            Assert.AreEqual(assembly.Namespaces["namespace2"].Types[0].Properties[0].ToString(), "a{ public set; }");
         }
     }
 }
